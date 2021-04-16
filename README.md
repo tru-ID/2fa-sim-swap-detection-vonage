@@ -2,9 +2,9 @@
 
 ## Requirements
 
-The requirements for these project are:
+The requirements for this project are:
 
-- Node.js
+- [Node.js](https://nodejs.org)
 
 ## Getting Started
 
