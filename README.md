@@ -1,22 +1,86 @@
-# Using Node.js and the Verify API for Step-up Authentication
+# Adding SIM Swap Detection to your Web App's 2FA Login Flow with Vonage Step-UP Authentication & **tru.ID** SIMCheck API
 
-This repo contains the example code for our [tutorial](https://developer.nexmo.com/verify/tutorials/step-up-authentication/introduction/node) on using the Vonage Verify API to authenticate a user by their mobile phone number. It is written in Node.js using the Express framework.
+## Requirements
 
-## Installing your own version
-Follow these steps to get your own version of this up and running:
+The requirements for these project are:
+
+- Node.js
+
+## Getting Started
+
+This project uses Vonage's [node-stepup-auth](https://github.com/nexmo-community/node-stepup-auth) as the base in the `starter-files` branch.
+
+Clone the `starter-files` branch via:
+
+```
+git clone -b starter-files --single-branch https://github.com/tru-ID/2fa-sim-swap-detection-vonage.git
+```
+
+If you're only interested in the finished code in `main` then run:
+
+```
+git clone -b main https://github.com/tru-ID/2fa-sim-swap-detection-vonage.git
+```
+
+Next you need to configure Vonage using your account credentials.
+
+Copy the values of `.env.example` into a `.env` file via:
+
+```
+cd 2fa-sim-swap-detection-vonage && cp .env.example .env
+```
+
+Open the `.env` file and configure the following values:
+
+- `VONAGE_API_KEY`: Your Vonage API key found [on the developer dashboard](https://dashboard.nexmo.com)
+- `VONAGE_API_SECRET`: Your Vonage API key found [on the developer dashboard](https://dashboard.nexmo.com)
+- `VONAGE_BRAND_NAME`: A name for your application which will appear on the home page and also in the `from` field of any SMS sent via the Verify API. Up to 11 alphanumeric characters
+
+Next, Create a [tru.ID Account](https://tru.id)
+
+Install the **tru.ID** CLI via:
 
 ```bash
-git clone https://github.com/nexmo-community/node-stepup-auth.git
-cd node-stepup-auth && npm install
-```
-
-## Configuring the application
-Once installed, copy the `.env-example` file to `.env` in the application's root directory. Enter your API key and secret from the [Developer Dashboard](https://dashboard.nexmo.com) and also a name for your application which will appear on the home page and also in the `from` field of any SMS sent via the Verify API.
+npm i -g @tru_id/cli
 
 ```
-VONAGE_API_KEY=YOUR VONAGE API KEY
-VONAGE_API_SECRET=YOUR VONAGE API SECRET
-VONAGE_BRAND_NAME=UP TO 11 ALPHANUMERIC CHARACTERS
+
+Input your **tru.ID** credentials which can be found within the tru.ID [console](https://developer.tru.id/console)
+
+Create a new **tru.ID** project via:
+
 ```
-## Running the application
-You should then be able to run the app with `npm start`. Open `http://localhost:3000` in your browser to begin.
+tru projects:create sms-2fa-vonage
+```
+
+configure the following values in your `.env`:
+
+- `TRU_ID_CLIENT`: The client ID found in the `tru.json` file in the newly created **tru.ID** project.
+- `TRU_ID_SECRET`: The client secret found in the `tru.json` file in the newly created **tru.ID** project.
+
+## Restoring Dependencies
+
+In order to restore dependencies run:
+
+```bash
+npm install
+```
+
+## Starting Project
+
+In order to start the project run:
+
+```bash
+npm start
+```
+
+## References
+
+- [**tru.ID** docs](https://developer.tru.id/docs)
+- [Vonage's node-stepup-auth](https://github.com/nexmo-community/node-stepup-auth)
+
+## Meta
+
+Distributed under the MIT License. See [LICENSE](https://github.com/tru-ID/2fa-sim-swap-detection-vonage/blob/main/LICENSE.md)
+
+[**tru.ID**](https://tru.id)
