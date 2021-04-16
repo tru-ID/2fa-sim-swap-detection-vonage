@@ -27,7 +27,7 @@ Next you need to configure Vonage using your account credentials.
 Copy the values of `.env.example` into a `.env` file via:
 
 ```
-cd 2fa-sim-swap-detection-vonage && cp .env.example .env
+cd 2fa-sim-swap-detection-vonage && cp example.env .env
 ```
 
 Open the `.env` file and configure the following values:
