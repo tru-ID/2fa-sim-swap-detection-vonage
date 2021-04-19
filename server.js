@@ -72,6 +72,7 @@ app.post('/verify', async (req, res) => {
     verifyRequestNumber,
     access_token
   );
+  console.log(verifyRequestNumber.split('+')[1]);
   if (!no_sim_change) {
     return res.render('simChangedRecently', {
       error:
@@ -80,7 +81,7 @@ app.post('/verify', async (req, res) => {
   }
   vonage.verify.request(
     {
-      number: verifyRequestNumber,
+      number: verifyRequestNumber.split('+')[1],
       brand: VONAGE_BRAND_NAME,
     },
     (err, result) => {
@@ -88,6 +89,7 @@ app.post('/verify', async (req, res) => {
         console.error(err);
       } else {
         verifyRequestId = result.request_id;
+        console.log(result);
         console.log(`request_id: ${verifyRequestId}`);
       }
     }
