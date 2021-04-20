@@ -5,6 +5,8 @@
 The requirements for this project are:
 
 - [Node.js](https://nodejs.org)
+- A [tru.ID Account](https://tru.id)
+- A [Vonage Account](https://developer.nexmo.com/)
 
 ## Getting Started
 
