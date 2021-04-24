@@ -26,7 +26,7 @@ git clone -b main https://github.com/tru-ID/2fa-sim-swap-detection-vonage.git
 
 Next you need to configure Vonage using your account credentials.
 
-Copy the values of `.env.example` into a `.env` file via:
+Copy the values of `example.env` into a `.env` file via:
 
 ```
 cd 2fa-sim-swap-detection-vonage && cp example.env .env
