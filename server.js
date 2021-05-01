@@ -66,7 +66,7 @@ app.post('/verify', (req, res) => {
 	verifyRequestNumber = req.body.number;
 	vonage.verify.request(
 		{
-			number: verifyRequestNumber,
+			number: verifyRequestNumber.split('+')[1],
 			brand: VONAGE_BRAND_NAME,
 		},
 		(err, result) => {
