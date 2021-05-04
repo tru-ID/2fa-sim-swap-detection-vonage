@@ -1,4 +1,4 @@
-# Adding SIM Swap Detection to your Web App's 2FA Login Flow with Vonage Step-UP Authentication & **tru.ID** SIMCheck API
+# SIM Swap Detection to your Web App's Vonage Verify 2FA Login Flow using **tru.ID** SIMCheck
 
 ## Requirements
 
