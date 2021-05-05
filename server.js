@@ -144,6 +144,6 @@ app.get('/cancel', (req, res) => {
 	res.redirect('/');
 });
 
-const server = app.listen(4000, () => {
+const server = app.listen(3000, () => {
 	console.log(`Server running on port ${server.address().port}`);
 });
