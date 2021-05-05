@@ -68,20 +68,24 @@ app.post('/verify', async (req, res) => {
   //create access token
   const accessToken = await createAccessToken();
   // perform SIMCheck
-  const no_sim_change = await performSimCheck(verifyRequestNumber, accessToken);
+  const { number_not_supported, sim_changed } = await performSimCheck(
+    verifyRequestNumber,
+    accessToken
+  );
   console.log(verifyRequestNumber);
-  if (typeof no_sim_change === 'undefined') {
-    return res.render('simChangedRecently', {
-      error:
-        'Verification Failed. We do not support the phone number. Please contact your network operator.',
-    });
-  }
-  if (no_sim_change === false) {
+  if (sim_changed) {
     return res.render('simChangedRecently', {
       error:
         'Verification Failed. SIM changed too recently. Please contact your network operator.',
     });
   }
+  if (number_not_supported) {
+    return res.render('simChangedRecently', {
+      error:
+        'Verification Failed. We do not support the phone number. Please contact your network operator.',
+    });
+  }
+
   vonage.verify.request(
     {
       number: verifyRequestNumber.split('+')[1],
