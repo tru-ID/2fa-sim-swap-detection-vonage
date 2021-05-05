@@ -88,7 +88,7 @@ app.post('/verify', async (req, res) => {
 
   vonage.verify.request(
     {
-      number: verifyRequestNumber.split('+')[1],
+      number: verifyRequestNumber,
       brand: VONAGE_BRAND_NAME,
     },
     (err, result) => {
