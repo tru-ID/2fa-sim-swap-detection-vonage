@@ -7,6 +7,9 @@ const bodyParser = require('body-parser');
 const app = express();
 const Vonage = require('@vonage/server-sdk');
 
+const { createAccessToken } = require('./helpers/createAccessToken');
+const { performSimCheck } = require('./helpers/performSimCheck');
+
 const VONAGE_API_KEY = process.env.VONAGE_API_KEY;
 const VONAGE_API_SECRET = process.env.VONAGE_API_SECRET;
 const VONAGE_BRAND_NAME = process.env.VONAGE_BRAND_NAME;
@@ -61,9 +64,34 @@ app.get('/authenticate', (req, res) => {
 	res.render('authenticate');
 });
 
-app.post('/verify', (req, res) => {
+app.post('/verify', async (req, res) => {
 	// Start the verification process
 	verifyRequestNumber = req.body.number;
+  
+	//create access token
+	const accessToken = await createAccessToken();
+  
+	// perform SIMCheck
+	const { numberSupported, simChanged } = await performSimCheck(
+	  verifyRequestNumber,
+	  accessToken
+	);
+  
+	console.log(verifyRequestNumber);
+  
+	if (simChanged === true) {
+	  return res.render('error', {
+		error:
+		  'Verification Failed. SIM changed too recently. Please contact support.',
+	  });
+	}
+	if (numberSupported === false) {
+	  return res.render('error', {
+		error:
+		  'Verification Failed. We do not support the phone number. Please contact support.',
+	  });
+	}
+
 	vonage.verify.request(
 		{
 			number: verifyRequestNumber,
@@ -116,6 +144,6 @@ app.get('/cancel', (req, res) => {
 	res.redirect('/');
 });
 
-const server = app.listen(3000, () => {
+const server = app.listen(4000, () => {
 	console.log(`Server running on port ${server.address().port}`);
 });
