@@ -74,13 +74,13 @@ app.post('/verify', async (req, res) => {
   );
   console.log(verifyRequestNumber);
   if (sim_changed) {
-    return res.render('simChangedRecently', {
+    return res.render('error', {
       error:
         'Verification Failed. SIM changed too recently. Please contact your network operator.',
     });
   }
   if (number_not_supported) {
-    return res.render('simChangedRecently', {
+    return res.render('error', {
       error:
         'Verification Failed. We do not support the phone number. Please contact your network operator.',
     });
