@@ -1,14 +1,14 @@
 const fetch = require('node-fetch');
-exports.performSimCheck = async (phone_number, access_token) => {
+exports.performSimCheck = async (phoneNumber, accessToken) => {
  let simChanged
   let numberSupported = true
 
-  const body = JSON.stringify({ phone_number: phone_number })
+  const body = JSON.stringify({ phone_number: phoneNumber })
   const response = await fetch(`https://eu.api.tru.id/sim_check/v0.1/checks`, {
     method: 'POST',
     body,
     headers: {
-      Authorization: `Bearer ${access_token}`,
+      Authorization: `Bearer ${accessToken}`,
       'Content-Type': 'application/json',
     },
   })
